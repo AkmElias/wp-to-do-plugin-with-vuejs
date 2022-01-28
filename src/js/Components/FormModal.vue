@@ -1,5 +1,6 @@
 <template>
-  <el-dialog title="Create Custom To Do Format 🔥" :visible="showForm" center>
+  <el-dialog title="Create Custom To Do Format 🔥"  :visible="showForm" center  :before-close="handleClose">
+
     <el-form ref="form" :rules="rules" :model="form" :label-width="formLabelWidth">
       <el-form-item label="Title" :label-width="formLabelWidth" prop="title">
         <el-input v-model="form.title" autocomplete="off" placeholder="Eg: Daily to do's, Long term to do's.."></el-input>
@@ -30,6 +31,7 @@
 </template>
 
 <script>
+import { ElMessageBox } from 'element-ui';
 
 export default {
   name: "FormModal",
@@ -69,15 +71,20 @@ export default {
   watch: {
     showForm(newVal){
       if(newVal === this.showForm){
-        console.log('..............');
-
+        return;
       } else {
         this.showForm = newVal;
-        console.log('..............!!');
+
       }
     }
   },
   methods: {
+    handleClose(){
+      if(confirm('Are you sure to close this dialog?')){
+        this.$emit('toggleModal', false)
+      }
+    },
+
     hide()
     {
       this.$emit('toggleModal', false);
