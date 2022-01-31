@@ -48,9 +48,10 @@ class Activator
     {
         global $wpdb;
         $charset_collate = $wpdb->get_charset_collate();
-        $table_name = $wpdb->prefix . 'to_do';
+        $wp_to_do_table = $wpdb->prefix . 'to_do';
+        $custom_todo_table = $wpdb->prefix . 'custom_todo';
 
-        $sql = "CREATE TABLE IF NOT EXISTS $table_name (
+        $sql = "CREATE TABLE IF NOT EXISTS $wp_to_do_table (
           id INT NOT NULL AUTO_INCREMENT,
           title TEXT NOT NULL,
           list_limit INT(3) NOT NULL DEFAULT '10',
@@ -59,9 +60,20 @@ class Activator
           PRIMARY KEY (id)
          ) $charset_collate;";
 
+        $sql_custom_todo = "CREATE TABLE IF NOT EXISTS $custom_todo_table(
+                 task_id INT AUTO_INCREMENT,
+                 task_title VARCHAR(100) NOT NULL,
+                 task_status VARCHAR(30) NOT NULL,
+                 to_do_id INT NOT NULL, 
+                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                 FOREIGN KEY (to_do_id) REFERENCES $wp_to_do_table(id),
+                 PRIMARY KEY (task_id)
+                ) $charset_collate;";
+
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
         dbDelta( $sql );
+        dbDelta($sql_custom_todo);
     }
 
     private function runSQL($sql, $tableName)

@@ -23,7 +23,7 @@ export default class toDo {
     }
 
     $adminGet(options) {
-        options.action = 'to-do_admin_ajax';
+        options.action = 'to_do_admin_ajax';
         return window.jQuery.get(window.toDoAdmin.ajaxurl, options);
     }
 

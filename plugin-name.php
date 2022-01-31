@@ -37,6 +37,7 @@ if (!defined('TODO_VERSION')) {
     define('TODO_VERSION', '1.1.0');
     define('TODO_MAIN_FILE', __FILE__);
     define('TODO_URL', plugin_dir_url(__FILE__));
+    define('TODO_ASSETS', TODO_URL . 'assets' );
     define('TODO_DIR', plugin_dir_path(__FILE__));
     define('TODO_UPLOAD_DIR', '/to-do');
 
@@ -47,6 +48,7 @@ if (!defined('TODO_VERSION')) {
             if (is_admin()) {
                 $this->adminHooks();
             }
+                $this->frontendHooks();
         }
 
         public function adminHooks()
@@ -64,6 +66,21 @@ if (!defined('TODO_VERSION')) {
             add_action('to-do/render_admin_app', function () {
                 $adminApp = new \toDo\Classes\AdminApp();
                 $adminApp->bootView();
+            });
+        }
+
+        public function frontendHooks()
+        {
+            require TODO_DIR . 'includes/autoload.php';
+
+            new \toDo\Classes\Assets();
+            new \toDo\Classes\Shortcode();
+            // Top Level Ajax Handlers
+            $ajaxHandler = new \toDo\Classes\FrontendAjaxHandler();
+            $ajaxHandler->registerEndpoints();
+
+            add_action('to-do/render_frontend_app', function (){
+
             });
         }
 

@@ -64,7 +64,7 @@ export default {
        this.submitButtonText = "Update";
        this.form.title = this.editableTodo.title;
        this.form.list_limit = this.editableTodo.list_limit;
-       this.form.show_completed = this.editableTodo.show_completed;
+       this.form.show_completed = this.editableTodo.show_completed == 'true' ? true : false;
        this.form.theme = this.editableTodo.theme;
     }
   },

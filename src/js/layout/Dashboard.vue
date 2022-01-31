@@ -10,7 +10,7 @@
 
                 <el-table-column prop="id" label="ID"/>
 <!--                <el-table-column prop="shortcode" label="Shortcode" width="250"></el-table-column>-->
-                <el-table-column prop="shortcode" label="Shortcode" width="180" #default="scope" tabindex="0">
+                <el-table-column prop="shortcode" label="Shortcode" width="180" #default="scope">
                   <el-tooltip
                       class="box-item"
                       effect="dark"
@@ -25,7 +25,6 @@
                         readonly
                     />
                   </el-tooltip>
-
                 </el-table-column>
                 <el-table-column prop="title" label="Title" />
                 <el-table-column prop="list_limit" label="List_limit"  />
@@ -73,7 +72,7 @@ export default
   mounted()
   {
       this.loadCustomToDos();
-      console.log('data', this.tableData);
+      // console.log('data', this.tableData);
   },
 
   methods:
