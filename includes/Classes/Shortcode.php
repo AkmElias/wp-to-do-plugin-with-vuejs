@@ -4,9 +4,13 @@ namespace toDo\Classes;
 
 class Shortcode
 {
+    protected $frontend;
+
     public function __construct()
     {
         add_shortcode("wp-todo", [$this, 'wp_custom_todo_template']);
+
+        $this->frontend = new Frontend();
 
     }
 
@@ -32,9 +36,8 @@ class Shortcode
             $wp_custom_todo = json_encode($result);
             $wp_custom_todo = json_decode($wp_custom_todo, true);
 
-
             $e .= '<div class="todo-container">';
-            $e .= '<h4>'. $wp_custom_todo['title'] .'</h4>';
+            $e .= $this->getHeader($wp_custom_todo);
             $e .= '<p class="todo-title">' . esc_html__('TODO\'S', 'to-do') . '</p>';
             $e .= '<form id="add-form">';
             $e .= '<div class="todo-input-group">';
@@ -44,16 +47,61 @@ class Shortcode
             $e .= '</div>';
             $e .= '</form>';
             $e .= '<div id="todo-lists" class="todo-lists">';
-            $e .= '<p class="todo-item">' . esc_html__('No Task Assigned Yet', 'to-do') . '</p>';
+
+            $e .= $this->frontend->get_tasks($wp_custom_todo['id']);
+
             $e .= '</div>';
             $e .= '<div class="done-section" style="margin-top: 10px;">';
-            $e .= ' <p class="done-title">'. esc_html__('Done','to-do') .'</p>';
-            $e .= '<div id="done-lists" class="todo-lists">';
-            $e .= '<p class="done-item">'. esc_html__('No Complete task found','to-do').  '</p>';
-            $e .= '</div>';
+
+            if($wp_custom_todo['show_completed'] === 'true') {
+                $e .= ' <p class="done-title">'. esc_html__('Done','to-do') .'</p>';
+                $e .= '<div id="done-lists" class="todo-lists">';
+                $e .= $this->frontend->get_done_tasks($wp_custom_todo['id']);
+                $e .= '</div>';
+            }
+
             $e .= '</div>';
             $e .= '</div>';
         }
+
+        return $e;
+    }
+
+    protected function getHeader($wp_custom_todo)
+    {
+        $e = '';
+
+        $list_limit = '';
+        $show_done = '';
+
+        if ($wp_custom_todo['list_limit'] == 10) {
+            $list_limit = 'Minimum';
+        } else if ($wp_custom_todo['list_limit'] == 15) {
+            $list_limit = 'Medium';
+        } else {
+            $list_limit = 'Maximum';
+        }
+
+        $show_done = $wp_custom_todo['show_completed'] === 'true' ? 'Yes' : 'No';
+
+        $e .= '<div class="todo-header">';
+        $e .= '<div class="header-item">';
+        $e .= '<span class="header-level"> Title <p>' . esc_html($wp_custom_todo['title']). ' Todo</p></span>';
+        $e .= '</div>';
+
+        $e .= '<div class="header-item">';
+        $e .= '<span class="header-level"> List Limit  <p>' . esc_html($list_limit, 'todo'). '</p></span>';
+        $e .= '</div>';
+
+        $e .= '<div class="header-item">';
+        $e .= '<span class="header-level"> Show Done  <p>' . esc_html($show_done, 'todo'). '</p></span>';
+        $e .= '</div>';
+
+        $e .= '<div class="header-item">';
+        $e .= '<span class="header-level"> Theme <p>' . esc_html($wp_custom_todo['theme'], 'todo'). '</p></span>';
+        $e .= '</div>';
+
+        $e .= '</div>';
 
         return $e;
     }

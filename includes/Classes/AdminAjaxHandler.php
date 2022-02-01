@@ -99,7 +99,7 @@ class AdminAjaxHandler
 
         //check error and send response
         if($error){
-            wp_send_json_error( $errors );
+            wp_send_json_error( $errors, 403 );
             wp_die();
         }
 
