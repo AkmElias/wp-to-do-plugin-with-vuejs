@@ -4,12 +4,20 @@ namespace toDo\Classes;
 
 class Assets
 {
+    /**
+     * most important to load all assets needed for frontend
+     * trigger enqueue_scripts
+     */
     public function __construct()
     {
-//        add_action('admin_enqueue_scripts', [$this, 'register']);
         add_action('wp_enqueue_scripts', [$this, 'register'], 999);
     }
 
+    /**
+     * register frontend scripts when wp_enqueue_scripts triggered
+     * and localize script
+     * @return void
+     */
     public function register()
     {
         $this->register_scripts($this->get_frontend_scripts());
@@ -20,6 +28,10 @@ class Assets
         ));
     }
 
+    /**
+     * @param $scripts
+     * @return void
+     */
     public function register_scripts($scripts)
     {
         foreach ($scripts as $handle => $script) {
@@ -30,7 +42,10 @@ class Assets
         }
     }
 
-    // register styles
+    /**
+     * @param $styles
+     * @return void
+     */
     public function register_styles($styles)
     {
         foreach ($styles as $handle => $style) {
@@ -41,6 +56,9 @@ class Assets
         }
     }
 
+    /**
+     * @return array[]
+     */
     public function get_frontend_scripts():array
     {
         return [
@@ -53,6 +71,9 @@ class Assets
         ];
     }
 
+    /**
+     * @return array[]
+     */
     public function get_frontend_styles(): array
     {
         return [

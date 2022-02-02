@@ -14,6 +14,10 @@ class Frontend
         $this->table = $wpdb->prefix. 'custom_todo';
     }
 
+    /**
+     * @param $to_do_id
+     * @return string
+     */
     public function get_tasks($to_do_id): string
     {
         //error data
@@ -21,10 +25,11 @@ class Frontend
         $errors = array();
 
         $results = $this->_wpdb->get_results("SELECT * from $this->table WHERE to_do_id = $to_do_id AND task_status = 'in_progress'");
-        if($results){
+
+        if ($results) {
             error_log('results found......');
         }
-        if(is_wp_error($results)){
+        if (is_wp_error($results)) {
             wp_send_json([
                 'success' => false,
                 'status' => 404,
@@ -33,13 +38,17 @@ class Frontend
             wp_die();
         }
 
-        if($this->_wpdb->num_rows == 0){
+        if ($this->_wpdb->num_rows == 0) {
             return '<p class="todo-item"> No Tasks assigned.. </p>';
         }
 
         return $this->get_tasks_html($results);
     }
 
+    /**
+     * @param $to_do_id
+     * @return string
+     */
     public function get_done_tasks($to_do_id)
     {
         $results = $this->_wpdb->get_results("SELECT * from $this->table WHERE to_do_id = $to_do_id AND task_status != 'in_progress'");
@@ -61,6 +70,10 @@ class Frontend
 
     }
 
+    /**
+     * @param $results
+     * @return string
+     */
     public function get_tasks_html($results): string
     {
         $html = '';
@@ -78,6 +91,10 @@ class Frontend
         return $html;
     }
 
+    /**
+     * @param $results
+     * @return string
+     */
     public function get_done_tasks_html($results): string
     {
         $html = '';

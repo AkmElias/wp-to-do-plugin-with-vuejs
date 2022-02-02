@@ -40,7 +40,6 @@ class Activator
         * If you need any database just active this function bellow
         * and write your own query at createBookmarkTable function
         */
-        print_r('migrate called...........');
          $this->createToDoTable();
     }
 
@@ -51,7 +50,7 @@ class Activator
         $wp_to_do_table = $wpdb->prefix . 'to_do';
         $custom_todo_table = $wpdb->prefix . 'custom_todo';
 
-        $sql = "CREATE TABLE IF NOT EXISTS $wp_to_do_table (
+        $sql_to_do = "CREATE TABLE $wp_to_do_table (
           id INT NOT NULL AUTO_INCREMENT,
           title TEXT NOT NULL,
           list_limit INT(3) NOT NULL DEFAULT '10',
@@ -60,7 +59,7 @@ class Activator
           PRIMARY KEY (id)
          ) $charset_collate;";
 
-        $sql_custom_todo = "CREATE TABLE IF NOT EXISTS $custom_todo_table(
+        $sql_custom_todo = "CREATE TABLE $custom_todo_table(
                  task_id INT AUTO_INCREMENT,
                  task_title VARCHAR(100) NOT NULL,
                  task_status VARCHAR(30) NOT NULL,
@@ -70,12 +69,17 @@ class Activator
                  PRIMARY KEY (task_id)
                 ) $charset_collate;";
 
-        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+//        require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
-        dbDelta( $sql );
-        dbDelta($sql_custom_todo);
+        $this->runSQL( $sql_to_do , $wp_to_do_table);
+        $this->runSQL($sql_custom_todo, $custom_todo_table);
     }
 
+    /**
+     * @param $sql
+     * @param $tableName
+     * @return void
+     */
     private function runSQL($sql, $tableName)
     {
         global $wpdb;

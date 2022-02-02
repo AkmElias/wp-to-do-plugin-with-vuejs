@@ -14,11 +14,20 @@ class AdminAjaxHandler
         $this->table = $wpdb->prefix. 'to_do';
     }
 
+    /**
+     * registering all nescessary end ponts for admin request
+     * @return void
+     */
     public function registerEndpoints()
     {
         add_action('wp_ajax_to_do_admin_ajax', array($this, 'handleEndPoints'));
     }
 
+    /**
+     * Check/Handle every endpoint request.
+     * return error/proceed with the request if request pass the verification
+     * @return void
+     */
     public function handleEndPoints()
     {
 //        check nonce, if it fails return
@@ -49,6 +58,10 @@ class AdminAjaxHandler
         do_action('to-do/admin_ajax_handler_catch', $route);
     }
 
+    /**
+     * fetch all custom todo by to_do_id
+     * @return $result fecthed from table via wp_send_json/send error
+     */
     protected function getAllCustomTodo()
     {
         //error data
@@ -69,6 +82,10 @@ class AdminAjaxHandler
         wp_die();
     }
 
+    /**
+     * add a custom_todo where with to_do_id
+     * @return false|void
+     */
     protected function addCustomTodo()
     {
         //error data
@@ -112,6 +129,9 @@ class AdminAjaxHandler
         }
     }
 
+    /**
+     * @return false|void
+     */
     protected function updateCustomTodo()
     {
         //error data
@@ -147,6 +167,9 @@ class AdminAjaxHandler
 
     }
 
+    /**
+     * @return false|void
+     */
     protected function  deleteCustomTodo()
     {
         //error data
@@ -157,7 +180,6 @@ class AdminAjaxHandler
         $where = array();
         $id = sanitize_text_field($_POST['id']);
         $where['id'] = $id;
-//      $where['creatorId'] = get_current_user_id();
 
         //delete
         $result = $this->_wpdb->delete($this->table, $where);

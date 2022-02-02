@@ -3,10 +3,10 @@
 /*
 Plugin Name: to-do
 Plugin URI: #
-Description: A WordPress boilerplate plugin with Vue js.
+Description: A basic to-do WordPress plugin using a boilerplate plugin with Vue js.
 Version: 1.0.0
-Author: #
-Author URI: #
+Author: Elias
+Author URI: https://github.com/AkmElias
 License: A "Slug" license name e.g. GPL2
 Text Domain: textdomain
 */
@@ -48,7 +48,7 @@ if (!defined('TODO_VERSION')) {
             if (is_admin()) {
                 $this->adminHooks();
             }
-                $this->frontendHooks();
+            $this->frontendHooks();
         }
 
         public function adminHooks()
@@ -75,13 +75,11 @@ if (!defined('TODO_VERSION')) {
 
             new \toDo\Classes\Assets();
             new \toDo\Classes\Shortcode();
+
             // Top Level Ajax Handlers
             $ajaxHandler = new \toDo\Classes\FrontendAjaxHandler();
             $ajaxHandler->registerEndpoints();
 
-            add_action('to-do/render_frontend_app', function (){
-
-            });
         }
 
         public function textDomain()

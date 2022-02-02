@@ -36,8 +36,8 @@ class Shortcode
             $wp_custom_todo = json_encode($result);
             $wp_custom_todo = json_decode($wp_custom_todo, true);
 
-            $e .= '<div class="todo-container">';
             $e .= $this->getHeader($wp_custom_todo);
+            $e .= '<div class="todo-container">';
             $e .= '<p class="todo-title">' . esc_html__('TODO\'S', 'to-do') . '</p>';
             $e .= '<form id="add-form">';
             $e .= '<div class="todo-input-group">';
