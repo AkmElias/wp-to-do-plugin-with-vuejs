@@ -1,29 +1,21 @@
 # WordPress boilerplate plugin with Vue.js
 
-#### A simple to-do WordPress plugin using vue js by using this(https://github.com/hasanuzzamanbe/framework-base-wp-boilerplate-with-vue) boilerplate for wordpress with vue.
+#### A simple  custom-to-do WordPress plugin using vue js by using this(https://github.com/hasanuzzamanbe/framework-base-wp-boilerplate-with-vue) boilerplate for wordpress with vue.
+
 ##### [ If you want to use framework base WordPress boilerplate with more advanced MVC pattern. Then check another one from here
 https://github.com/hasanuzzamanbe/framework-base-wp-boilerplate-with-vue ]
+
 ## How to use:
 
 * Clone this repository on your local `plugin folder`
 
 * Run command `npm i` to install node modules.
-* 
+
 Your plugin is ready to use.
 
 Now run `npm run watch`
 
 Then activate the plugin from your WP admin dashboard.
-
-## Step to make your own plugin
-
-* Open with an IDE (Vscode, sublime, PhpStorm etc)
-
-* Change all the   `plugin_name` to Your-Plugin-Name 
-* Change all the   `PLUGINNAME`  to YOURPLUGINNAME    (Upper case)
-* Change all the   `PluginName`  to YourPluginName    (Upper Camel Case)
-* Change all the   `Plugin_Name` to your_plugin_name
-* Change all the   `textdomain`  to yourtextdomain
 
 </details>
 
@@ -32,8 +24,6 @@ Then activate the plugin from your WP admin dashboard.
 
 # Some suggestions for beginners:
 
-#### Now your plugin is ready to use with a standard format.
-#### You can write vue.js codes inside `/src` folder
 #### Do any customization you need.
 
  ### NB: These 3 packages are already installed on this project, You can use those or remove that if you don't need.
@@ -54,7 +44,4 @@ Then activate the plugin from your WP admin dashboard.
  
  
  ### For Help:
- Please feel free to mail me <a href="mailto:hasanuzzamanbe@gmail.com">hasanuzzamanbe@gmail.com</a>
- 
- For faster response please text me on https://www.hasanuzzaman.com live chat.
- 
+ Please feel free to mail me <a href="mailto:akmelias11@gmail.com">akmelias11@gmail.com</a>
