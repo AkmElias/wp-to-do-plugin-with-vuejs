@@ -8,7 +8,6 @@ https://github.com/hasanuzzamanbe/framework-base-wp-boilerplate-with-vue ]
 ## How to use:
 
 * Clone this repository on your local `plugin folder`
-
 * Run command `npm i` to install node modules.
 
 Your plugin is ready to use.
@@ -21,8 +20,6 @@ Then activate the plugin from your WP admin dashboard.
 
 ## All done have fun
 
-# Some suggestions for beginners:
-
 #### Do any customization you need.
 
  ### NB: These 3 packages are already installed on this project, You can use those or remove that if you don't need.
@@ -32,7 +29,6 @@ Then activate the plugin from your WP admin dashboard.
  
  For more details please check the `package.json` file
  
- 
  ### After Development Production:
  When your Plugin development is complete and you want to use it for production. Then run `npm run prod` after that you can delete some files which are already build.
  
@@ -40,7 +36,6 @@ Then activate the plugin from your WP admin dashboard.
  * node modules 
  * src
  * package-lock.json
- 
  
  ### For Help:
  Please feel free to mail me <a href="mailto:akmelias11@gmail.com">akmelias11@gmail.com</a>
