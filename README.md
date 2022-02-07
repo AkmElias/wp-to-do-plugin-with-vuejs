@@ -16,8 +16,6 @@ Now run `npm run watch`
 
 Then activate the plugin from your WP admin dashboard.
 
-</details>
-
 ## All done have fun
 
 #### Do any customization you need.
