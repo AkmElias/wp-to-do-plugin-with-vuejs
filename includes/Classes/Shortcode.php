@@ -63,7 +63,10 @@ class Shortcode
             }
 
             $e .= $this->getHeader();
-            $e .= '<div class="todo-container">';
+            $e .= '<div class="todo-container">'; 
+               //processing spinner
+            $e .= '<div class="lds-roller"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>';
+            
             $e .= '<p class="todo-title">' . esc_html__('TODO\'S', 'to-do') . '</p>';
             $e .= '<form id="add-form">';
             $e .= '<div class="todo-input-group">';
@@ -77,6 +80,8 @@ class Shortcode
             $e .= $this->frontend->get_tasks($this->to_do_id);
 
             $e .= '</div>';
+
+           
             $e .= '<div class="done-section" style="margin-top: 10px;">';
 
             if($this->show_done === 'Yes') {

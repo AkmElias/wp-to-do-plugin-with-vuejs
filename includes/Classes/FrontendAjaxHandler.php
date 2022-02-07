@@ -70,9 +70,7 @@ class FrontendAjaxHandler
      */
     protected function getAllCustomTodo()
     {
-        $to_do_id = isset($_POST['to_do_id']);
-
-//        error_log($this->frontend->get_tasks($to_do_id));
+        $to_do_id = $_POST['to_do_id'];
 
         $result =  $this->frontend->get_tasks($to_do_id);
 
