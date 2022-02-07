@@ -24,7 +24,7 @@ class Frontend
         $error = false;
         $errors = array();
 
-        $results = $this->_wpdb->get_results("SELECT * from $this->table WHERE to_do_id = $to_do_id AND task_status = 'in_progress'");
+        $results = $this->_wpdb->get_results("SELECT * from $this->table WHERE to_do_id = " . $to_do_id . " AND task_status = 'in_progress'");
 
         if ($results) {
             error_log('results found......');
@@ -49,9 +49,9 @@ class Frontend
      * @param $to_do_id
      * @return string
      */
-    public function get_done_tasks($to_do_id)
+    public function get_done_tasks($to_do_id): string
     {
-        $results = $this->_wpdb->get_results("SELECT * from $this->table WHERE to_do_id = $to_do_id AND task_status != 'in_progress'");
+        $results = $this->_wpdb->get_results("SELECT * from $this->table WHERE to_do_id = ". $to_do_id . " AND task_status != 'in_progress'");
 
         if(is_wp_error($results)){
             wp_send_json([

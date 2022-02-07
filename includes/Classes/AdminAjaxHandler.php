@@ -179,15 +179,29 @@ class AdminAjaxHandler
         //get ID
         $where = array();
         $id = sanitize_text_field($_POST['id']);
+
+        if(!$id){
+            $errors['message'] = "Id is missing";
+            wp_send_json_error($errors, 404);
+        }
+
         $where['id'] = $id;
 
         //delete
-        $result = $this->_wpdb->delete($this->table, $where);
+        try{
+            $result = $this->_wpdb->delete($this->table, $where);
+        }catch(Exception $e) {
+            var_dump('Message: ' .$e->getMessage());
+            die();
+        }
+
+        $response['data'] = $result;
+        $response['message'] = "you can't delete a parent!";
 
         if($result){
-            wp_send_json_success( $result, 200 );
-        } else {
-            return false;
+            wp_send_json_success($response);
         }
+        wp_send_json_error("You can't delete a parent row!!");
+
     }
 }

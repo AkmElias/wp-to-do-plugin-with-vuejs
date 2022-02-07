@@ -1,10 +1,11 @@
 <template>
     <div>
         <el-container>
-            <el-header class="header">
+            <el-header class="header" style="height: fit-content !important;">
               <el-button @click="show" >Add custom ToDo</el-button>
             </el-header>
             <el-main>
+              <el-alert v-if="successAlert" :title="successMessage" type="success" effect="dark" style="margin-bottom: 5px" @close="hideAlert"></el-alert>
                 <form-modal v-if="showFormModal" @toggleModal="toggleModal" @loadCustomToDos="loadCustomToDos" :showFormModal="showFormModal" :editableTodo="editableTodo"/>
               <el-table :data="tableData" class="custom-table">
 
@@ -67,6 +68,8 @@ export default
           tooltipContent: "Click to copy Shortcode!",
           showFormModal: false,
           editableTodo: {},
+          successAlert: false,
+          successMessage: "",
       }
   },
   mounted()
@@ -77,29 +80,32 @@ export default
 
   methods:
   {
-      loadCustomToDos(){
-      let _this = this;
-      jQuery.ajax({
-        method: 'POST',
-        url: ajax_obj.ajaxurl,
-        dataType: "json",
-        data: {
-          action: "to_do_admin_ajax",
-          route: "get_all_custom_todo",
-          nonce: ajax_obj.nonce,
-        },
-       success(res) {
-          if (res.success) {
-            console.log("success!!1", res.data);
-            _this.tableData = res.data;
-          } else {
-            // state.error = { nonce: req.message };
-          }
-        },
-        error({ responseJSON: { data } }, _, err) {
-          console.log("error!!1");
-          // state.error = data;
-        },
+      loadCustomToDos(message){
+        let _this = this;
+
+        jQuery.ajax({
+          method: 'POST',
+          url: ajax_obj.ajaxurl,
+          dataType: "json",
+          data: {
+            action: "to_do_admin_ajax",
+            route: "get_all_custom_todo",
+            nonce: ajax_obj.nonce,
+          },
+          success(res) {
+            if (res.success) {
+              console.log("success!!1", res.data);
+              _this.tableData = res.data;
+              _this.successAlert = true;
+              _this.successMessage = message ? message : "To Do Board Loaded";
+            } else {
+              // state.error = { nonce: req.message };
+            }
+          },
+          error({ responseJSON: { data } }, _, err) {
+             console.log("error!!1");
+            // state.error = data;
+          },
       })
     },
 
@@ -112,6 +118,8 @@ export default
         this.editableTodo = {};
         console.log('....called', this.showFormModal);
       },
+
+      hideAlert(){this.successAlert = false},
 
       toggleModal(newVal){
         console.log('...trigered1')
@@ -136,7 +144,7 @@ export default
           this.editableTodo = editableTodo;
       },
 
-      async handleDelete(id)
+      handleDelete(id)
       {
           console.log('delete call id: ',id );
           const _this = this;
@@ -152,11 +160,17 @@ export default
             },
             success: function(res){
               if(res){
-                _this.loadCustomToDos();
+                console.log(res);
+                _this.loadCustomToDos("To Do Board Deleted!");
+
               }
             },
-            error: function (err){
-              alert(err.message);
+            error: function (response){
+              if(typeof response.responseText === "string"){
+                let message = response.responseText.split('"data":')[1].split('}')[0];
+                alert(message);
+              }
+              // console.log(jQuery.parseJSON(response.responseText));
             }
           })
       },
@@ -169,7 +183,7 @@ export default
 .header {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: flex-start;
   margin: 10px 0 10px 15px;
   padding: 5px;

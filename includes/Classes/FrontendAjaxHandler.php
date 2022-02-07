@@ -70,9 +70,9 @@ class FrontendAjaxHandler
      */
     protected function getAllCustomTodo()
     {
-        $to_do_id = $_POST['to_do_id'];
+        $to_do_id = isset($_POST['to_do_id']);
 
-        error_log($this->frontend->get_tasks($to_do_id));
+//        error_log($this->frontend->get_tasks($to_do_id));
 
         $result =  $this->frontend->get_tasks($to_do_id);
 
@@ -127,27 +127,27 @@ class FrontendAjaxHandler
         //check error and send response
         if($error){
             wp_send_json_error( $errors, 403 );
-            wp_die();
         }
 
         //get list limit from current to do table
         $result = $this->_wpdb->get_row("SELECT * FROM wp_to_do WHERE id = ". $to_do_id);
 
-        $results = $this->_wpdb->get_results("SELECT * FROM $this->table WHERE to_do_id = $to_do_id");
+        $results = $this->_wpdb->get_results("SELECT * FROM $this->table WHERE to_do_id = ". $to_do_id);
 
-        if($this->_wpdb->num_rows > $result->list_limit){
+        if($this->_wpdb->num_rows >= $result->list_limit){
 
-            $errors['list_limit'] = "Task limit exceeded";
+            $errors['message'] = "Sorry!! Limit already exceeded.";
 
             wp_send_json_error( $errors, 403 );
-            wp_die();
         }
         //Call the create function after all verifications
         $result = $this->_wpdb->insert($this->table, $data);
+
         if($result){
             wp_send_json_success( $result, 200 );
         } else {
-            return false;
+            $errors['message'] = "Server error!";
+            wp_send_json_error($errors, 500);
         }
     }
 
@@ -196,7 +196,7 @@ class FrontendAjaxHandler
         if($result){
             wp_send_json_success( $result, 200 );
         } else {
-            return false;
+            wp_send_json_error($errors, 500);
         }
 
     }

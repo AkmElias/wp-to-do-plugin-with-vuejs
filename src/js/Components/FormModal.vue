@@ -127,7 +127,7 @@ export default {
         success(res) {
           if(res) {
             _this.$emit('toggleModal', false);
-            _this.$emit('loadCustomToDos');
+            _this.$emit('loadCustomToDos', "To Do Board Created!");
           }
         },
         error({ responseJSON: { data } }, _, err) {
@@ -158,7 +158,7 @@ export default {
         success(res) {
           if(res) {
             _this.$emit('toggleModal', false);
-            _this.$emit('loadCustomToDos');
+            _this.$emit('loadCustomToDos', "To Do Board Updated!");
           }
         },
         error({ responseJSON: { data } }, _, err) {
