@@ -1,4 +1,4 @@
-# WordPress boilerplate plugin with Vue.js
+# WordPress custom to do plugin with Vue.js
 
 #### A simple  custom-to-do WordPress plugin using vue js by using this(https://github.com/hasanuzzamanbe/framework-base-wp-boilerplate-with-vue) boilerplate for wordpress with vue.
 
@@ -20,7 +20,6 @@ Then activate the plugin from your WP admin dashboard.
 </details>
 
 ## All done have fun
-
 
 # Some suggestions for beginners:
 
