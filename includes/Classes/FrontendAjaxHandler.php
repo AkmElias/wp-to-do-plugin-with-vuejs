@@ -53,6 +53,7 @@ class FrontendAjaxHandler
             'get_all_done_todo'=> 'getAllDoneTodo',
             'add_custom_todo' => 'addCustomTodo',
             'update_custom_todo' => 'updateCustomTodo',
+            'undo_completion'=> 'undoCompletion',
             'delete_custom_todo' => 'deleteCustomTodo'
         );
 
@@ -166,6 +167,34 @@ class FrontendAjaxHandler
         //get Data
         $data = array();
         $data['task_status'] = "Done";
+
+        $result = $this->_wpdb->update($this->table, $data, $where);
+
+        if($result){
+            wp_send_json_success( $result, 200 );
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Change task status from Done to in_progress
+     * @return false|void
+     */
+    protected function undoCompletion()
+    {
+        //error data
+        $error = false;
+        $errors = array();
+
+        //get ID
+        $where = array();
+        $id = sanitize_text_field($_POST['id']);
+        $where['task_id'] = $id;
+
+        //get Data
+        $data = array();
+        $data['task_status'] = "in_progress";
 
         $result = $this->_wpdb->update($this->table, $data, $where);
 

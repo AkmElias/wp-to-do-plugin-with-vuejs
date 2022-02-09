@@ -75,7 +75,7 @@ class Shortcode
             $e .= '<button id="add-button" class="add-button">' . esc_html__('ADD TASK', 'to-do') . '</button>';
             $e .= '</div>';
             $e .= '</form>';
-            $e .= '<div id="todo-lists" class="todo-lists">';
+            $e .= '<div id="todo-lists" class="todo-lists" ondragover="event.preventDefault()">';
 
             $e .= $this->frontend->get_tasks($this->to_do_id);
 
@@ -86,7 +86,7 @@ class Shortcode
 
             if($this->show_done === 'Yes') {
                 $e .= ' <p class="done-title">'. esc_html__('Done','to-do') .'</p>';
-                $e .= '<div id="done-lists" class="todo-lists">';
+                $e .= '<div id="done-lists" class="todo-lists" ondragover="event.preventDefault()">';
                 $e .= $this->frontend->get_done_tasks($this->to_do_id);
                 $e .= '</div>';
             }

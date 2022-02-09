@@ -79,7 +79,7 @@ class Frontend
         $html = '';
 
         foreach ($results as $task){
-            $html .= '<div class="todo-item">';
+            $html .= '<div id="todo-item" class="todo-item" draggable="true" data-id="'.$task->task_id .'">';
             $html .= '<p style="margin: 0;">'. $task->task_title  .'</p>';
             $html .= '<div class="todo-item-actions">';
             $html .= '<span class="done-task" data-id="'.$task->task_id .'"><i class="fa fa-check done-icon" style="color: green;"></i></span>';
@@ -100,10 +100,10 @@ class Frontend
         $html = '';
 
         foreach ($results as $task){
-            $html .= '<div class="done-item">';
+            $html .= '<div id="done-item" class="done-item" draggable="true" data-id="'.$task->task_id .'">';
             $html .= '<p style="margin: 0;">'. $task->task_title  .'</p>';
             $html .= '<div class="todo-item-actions">';
-            $html .= '<span class="done-delete-task" data-id="'.$task->task_id .'"><i class="fa fa-times done-remove" style="color: red;"></i></span>';
+            $html .= '<span class="delete-task" data-id="'.$task->task_id .'"><i class="fa fa-times done-remove" style="color: red;"></i></span>';
             $html .= '</div>';
             $html .= '</div>';
         }
