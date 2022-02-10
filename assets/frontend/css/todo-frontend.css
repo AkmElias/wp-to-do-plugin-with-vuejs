@@ -1,0 +1,269 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.todo-header {
+  top: 0px;
+  background: #bbbbbb;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+}
+
+.todo-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 100vh;
+  background: #ddd;
+  padding: 15px 10px 15px 10px;
+}
+
+.todo-header .header-level {
+  color: green;
+  font-style: italic;
+  font-weight: bold;
+}
+
+.todo-header p {
+  margin-bottom: 0;
+  color: yellow;
+  font-style: normal;
+}
+
+.todo-input-group {
+  display: flex;
+  width: 450px;
+  justify-content: center;
+  align-items: center;
+  margin: 5px 5px 10px 8px;
+}
+
+.todo-input-group .task-input {
+  width: 76%;
+  padding: 8px;
+  border-width: 0;
+  outline: 0;
+  border-radius: 2px;
+  margin-right: 12px;
+}
+
+.todo-input-group .task-input:hover {
+  outline: 5px solid #bbbbbb;
+}
+
+.todo-input-group .add-button {
+  padding: 8px;
+  border-radius: 5px;
+  border-width: 0;
+  color: #fff;
+  background: yellowgreen;
+  box-shadow: #fff;
+}
+.todo-input-group .add-button:hover {
+  transition: 0.2s all linear;
+  color: #000;
+  background: #fff;
+}
+
+.todo-title {
+  padding: 5px;
+  color: darkorange;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.done-title {
+  padding: 5px;
+  color: darkgreen;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.todo-lists {
+  position: relative;
+  width: 450px;
+  display: flex;
+  background: #bbb;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  border-radius: 5px;
+  animation-name: visibility;
+  animation-duration: 1s;
+}
+
+.todo-item {
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background: #fff;
+  color: yellowgreen;
+  padding: 8px;
+  border-radius: 3px;
+  margin: 2.5px 0 2.5px 0;
+  cursor: pointer;
+  transition: all 1s ease-in;
+}
+
+.todo-item:hover {
+  transform: scale3d(1.03, 1, 1);
+  /*transform: translateZ(100px);*/
+  transition: 0.3s all ease-in;
+  color: #fff;
+  background-color: yellowgreen;
+  z-index: 999;
+}
+.todo-item span {
+  text-align: start;
+  font-weight: bold;
+  margin: 3px;
+}
+
+.done-item {
+  width: 98%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  background: green;
+  color: white;
+  padding: 8px;
+  border-radius: 3px;
+  margin: 2.5px 0 2.5px 0;
+  cursor: pointer;
+  transition: all 1s ease-in;
+}
+
+.done-icon:hover {
+  transform: scale3d(1.5, 1.05, 1);
+  transition: 0.3s all linear;
+}
+
+.remove:hover {
+  transform: scale3d(1.5, 1.05, 1);
+  transition: 0.3s all linear;
+}
+
+.done-remove:hover {
+  transform: scale3d(1.5, 1.05, 1);
+  transition: 0.3s all linear;
+}
+
+@keyframes visibility {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 25%;
+  }
+  50% {
+    opacity: 50%;
+  }
+  100% {
+    opacity: 100%;
+  }
+}
+
+/* spinner css */
+.lds-roller {
+  display: none;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-roller div {
+  animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+  transform-origin: 40px 40px;
+}
+.lds-roller div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #fff;
+  margin: -4px 0 0 -4px;
+}
+.lds-roller div:nth-child(1) {
+  animation-delay: -0.036s;
+}
+.lds-roller div:nth-child(1):after {
+  top: 63px;
+  left: 63px;
+}
+.lds-roller div:nth-child(2) {
+  animation-delay: -0.072s;
+}
+.lds-roller div:nth-child(2):after {
+  top: 68px;
+  left: 56px;
+}
+.lds-roller div:nth-child(3) {
+  animation-delay: -0.108s;
+}
+.lds-roller div:nth-child(3):after {
+  top: 71px;
+  left: 48px;
+}
+.lds-roller div:nth-child(4) {
+  animation-delay: -0.144s;
+}
+.lds-roller div:nth-child(4):after {
+  top: 72px;
+  left: 40px;
+}
+.lds-roller div:nth-child(5) {
+  animation-delay: -0.18s;
+}
+.lds-roller div:nth-child(5):after {
+  top: 71px;
+  left: 32px;
+}
+.lds-roller div:nth-child(6) {
+  animation-delay: -0.216s;
+}
+.lds-roller div:nth-child(6):after {
+  top: 68px;
+  left: 24px;
+}
+.lds-roller div:nth-child(7) {
+  animation-delay: -0.252s;
+}
+.lds-roller div:nth-child(7):after {
+  top: 63px;
+  left: 17px;
+}
+.lds-roller div:nth-child(8) {
+  animation-delay: -0.288s;
+}
+.lds-roller div:nth-child(8):after {
+  top: 56px;
+  left: 12px;
+}
+
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

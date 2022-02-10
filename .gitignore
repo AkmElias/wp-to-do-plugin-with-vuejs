@@ -1,5 +1,5 @@
 # Logs
-/.assets
+#/.assets
 logs
 *.log
 npm-debug.log*
@@ -104,5 +104,9 @@ dist
 # TernJS port file
 .tern-port
 
-assets/
+assets/css
+assets/fonts
+assets/images
+assets/js
+
 src/images/.DS_Store
